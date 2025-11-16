@@ -25,7 +25,7 @@ func main() {
 	// Ruta simple
 	r.GET("/", func(c *gin.Context) {
 		c.JSON(200, gin.H{
-			"message": "buenas mundo te presento ...",
+			"message": "Probando nueva estructura",
 		})
 	})
 
