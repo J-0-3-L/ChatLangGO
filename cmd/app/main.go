@@ -1,12 +1,13 @@
 package main
 
 import (
+	"go000/internal/handlers"
+
 	"github.com/gin-contrib/cors"
 	"github.com/gin-gonic/gin"
 )
 
 func main() {
-	// fmt.Println("lo logramos")
 
 	// Crear router
 	r := gin.Default()
@@ -22,12 +23,8 @@ func main() {
 	// 	AllowCredentials: true,
 	// }))
 
-	// Ruta simple
-	r.GET("/", func(c *gin.Context) {
-		c.JSON(200, gin.H{
-			"message": "Probando nueva estructura",
-		})
-	})
+	// Rutas
+	handlers.RegisterRoutes(r)
 
 	// Iniciar el server
 	r.Run(":8080")
