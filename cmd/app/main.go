@@ -1,11 +1,18 @@
 package main
 
 import (
+	"go000/internal/config"
 	"go000/internal/handlers"
 
 	"github.com/gin-contrib/cors"
 	"github.com/gin-gonic/gin"
 )
+
+// @title Example API
+// @version 1.0
+// @description A simple API to demonstrate Swagger with Gin
+// @host localhost:8080
+// @BasePath /api/v1
 
 func main() {
 
@@ -22,6 +29,9 @@ func main() {
 	// 	ExposeHeaders:    []string{"Content-Length"},
 	// 	AllowCredentials: true,
 	// }))
+
+	// Config de swagger
+	config.ConfigSwagger(r)
 
 	// Rutas
 	handlers.RegisterRoutes(r)
