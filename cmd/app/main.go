@@ -4,6 +4,8 @@ import (
 	"go000/internal/config"
 	"go000/internal/handlers"
 
+	_ "go000/cmd/app/docs"
+
 	"github.com/gin-contrib/cors"
 	"github.com/gin-gonic/gin"
 )
