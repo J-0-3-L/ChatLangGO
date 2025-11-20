@@ -2,9 +2,10 @@ package config
 
 import (
 	"github.com/gin-gonic/gin"
-	"github.com/swaggo/gin-swagger/swaggerFiles"
-
 	ginSwagger "github.com/swaggo/gin-swagger"
+	//"github.com/swaggo/gin-swagger"
+	//"github.com/swaggo/gin-swagger/swaggerFiles"
+	//"github.com/swaggo/gin-swagger"
 )
 
 // @title Mi API de Ejemplo
