@@ -4,17 +4,17 @@ import (
 	"go000/internal/config"
 	"go000/internal/handlers"
 
-	_ "go000/cmd/app/docs"
+	_ "go000/internal/docs"
 
 	"github.com/gin-contrib/cors"
 	"github.com/gin-gonic/gin"
 )
 
-// @title Example API
+// @title ChatLanGO API
 // @version 1.0
-// @description A simple API to demonstrate Swagger with Gin
+// @description Una app de red social simple de chateo
 // @host localhost:8080
-// @BasePath /api/v1
+// @BasePath /
 
 func main() {
 
