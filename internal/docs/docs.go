@@ -15,6 +15,19 @@ const docTemplate = `{
     "host": "{{.Host}}",
     "basePath": "{{.BasePath}}",
     "paths": {
+        "/auth/register": {
+            "post": {
+                "description": "Registro de nuevos usuarios",
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Register"
+                ],
+                "summary": "Endpoint register",
+                "responses": {}
+            }
+        },
         "/test/": {
             "get": {
                 "description": "Devuelve un mensaje simple para verificar el funcionamiento del servidor.",
