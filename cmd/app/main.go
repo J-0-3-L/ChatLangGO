@@ -1,6 +1,7 @@
 package main
 
 import (
+	"go000/internal/auth"
 	"go000/internal/config"
 	"go000/internal/handlers"
 
@@ -37,7 +38,8 @@ func main() {
 
 	// Rutas
 	handlers.RegisterRoutes(r)
+	auth.AuthRoutes(r)
 
 	// Iniciar el server
-	r.Run(":8080")
+	r.Run(":8080") // go run ./cmd/app/main.go
 }
