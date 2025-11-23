@@ -1,4 +1,31 @@
 basePath: /
+definitions:
+  auth.RegisterInput:
+    properties:
+      email:
+        type: string
+      password:
+        minLength: 6
+        type: string
+      username:
+        type: string
+    required:
+    - email
+    - password
+    - username
+    type: object
+  auth.UserResponse:
+    properties:
+      avatar_url:
+        description: Password  string `json:"password"`
+        type: string
+      email:
+        type: string
+      id:
+        type: integer
+      username:
+        type: string
+    type: object
 host: localhost:8080
 info:
   contact: {}
@@ -8,13 +35,32 @@ info:
 paths:
   /auth/register:
     post:
-      description: Registro de nuevos usuarios
+      consumes:
+      - application/json
+      description: Crea nuevos usuarios en el API
+      parameters:
+      - description: Datos del usuario
+        in: body
+        name: user
+        required: true
+        schema:
+          $ref: '#/definitions/auth.RegisterInput'
       produces:
       - application/json
-      responses: {}
-      summary: Endpoint register
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/auth.UserResponse'
+        "400":
+          description: Bad Request
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+      summary: Registro de usuarios
       tags:
-      - Register
+      - auth
   /test/:
     get:
       description: Devuelve un mensaje simple para verificar el funcionamiento del

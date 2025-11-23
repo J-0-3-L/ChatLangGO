@@ -11,15 +11,45 @@
     "paths": {
         "/auth/register": {
             "post": {
-                "description": "Registro de nuevos usuarios",
+                "description": "Crea nuevos usuarios en el API",
+                "consumes": [
+                    "application/json"
+                ],
                 "produces": [
                     "application/json"
                 ],
                 "tags": [
-                    "Register"
+                    "auth"
                 ],
-                "summary": "Endpoint register",
-                "responses": {}
+                "summary": "Registro de usuarios",
+                "parameters": [
+                    {
+                        "description": "Datos del usuario",
+                        "name": "user",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/auth.RegisterInput"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/auth.UserResponse"
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "schema": {
+                            "type": "object",
+                            "additionalProperties": {
+                                "type": "string"
+                            }
+                        }
+                    }
+                }
             }
         },
         "/test/": {
@@ -42,6 +72,46 @@
                             }
                         }
                     }
+                }
+            }
+        }
+    },
+    "definitions": {
+        "auth.RegisterInput": {
+            "type": "object",
+            "required": [
+                "email",
+                "password",
+                "username"
+            ],
+            "properties": {
+                "email": {
+                    "type": "string"
+                },
+                "password": {
+                    "type": "string",
+                    "minLength": 6
+                },
+                "username": {
+                    "type": "string"
+                }
+            }
+        },
+        "auth.UserResponse": {
+            "type": "object",
+            "properties": {
+                "avatar_url": {
+                    "description": "Password  string `json:\"password\"`",
+                    "type": "string"
+                },
+                "email": {
+                    "type": "string"
+                },
+                "id": {
+                    "type": "integer"
+                },
+                "username": {
+                    "type": "string"
                 }
             }
         }
