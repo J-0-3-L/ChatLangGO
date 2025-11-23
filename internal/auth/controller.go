@@ -4,6 +4,7 @@ import (
 	"net/http"
 	//"time"
 
+	//"dto.go"
 	"go000/internal/config"
 	"go000/internal/models"
 
@@ -16,18 +17,18 @@ var SecretJwt = []byte("SECRETO_PASS")
 
 // Ruta register
 
-// @Summary Endpoint register
-// @Description Registro de nuevos usuarios
-// @Tags Register
+// @Summary Registro de usuarios
+// @Description Crea nuevos usuarios en el API
+// @Tags auth
+// @Accept json
 // @Produce json
-// Success 200 {object} map[string]string
+// @Param user body auth.RegisterInput true "Datos del usuario"
+// @Success 200 {object} auth.UserResponse
+// @Failure 400 {object} map[string]string
 // @Router /auth/register [post]
 func Register(c *gin.Context) {
-	var input struct {
-		Username string `json:"username" binding:"required"`
-		Email    string `json:"email" binding:"required,email"`
-		Password string `json:"password" binding:"required, min=6"`
-	}
+
+	var input RegisterInput
 
 	if err := c.ShouldBindJSON(&input); err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
@@ -52,5 +53,15 @@ func Register(c *gin.Context) {
 		return
 	}
 
-	c.JSON(http.StatusCreated, gin.H{"message": "Usuario registrado!!!"})
+	// c.JSON(http.StatusCreated, gin.H{"message": "Usuario registrado!!!"})
+	// Crear respuesta segura
+	response := UserResponse{
+		ID:       user.ID,
+		Username: user.Username,
+		Email:    user.Email,
+		//Password:  user.Password,
+		AvatarURL: user.AvatarURL,
+	}
+
+	c.JSON(http.StatusCreated, response)
 }
