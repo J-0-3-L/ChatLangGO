@@ -19,6 +19,10 @@ import (
 
 func main() {
 
+	config.ConnectionDB()
+
+	config.MigrateModels()
+
 	// Crear router
 	r := gin.Default()
 
