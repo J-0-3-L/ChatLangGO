@@ -6,8 +6,10 @@ import (
 
 	"go000/internal/models"
 
-	"gorm.io/driver/sqlite"
+	//"gorm.io/driver/sqlite"
+	"github.com/glebarez/sqlite"
 	"gorm.io/gorm"
+	//_ "modernc.org/sqlite"
 )
 
 var DB *gorm.DB
