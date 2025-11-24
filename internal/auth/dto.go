@@ -18,3 +18,8 @@ type UserResponse struct {
 	//Password  string `json:"password"`
 	AvatarURL string `json:"avatar_url"`
 }
+
+type LoginResponse struct {
+	Message string `json:"message"`
+	Token   string `json:"token"`
+}
