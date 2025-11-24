@@ -1,5 +1,22 @@
 basePath: /
 definitions:
+  auth.LoginInput:
+    properties:
+      email:
+        type: string
+      password:
+        type: string
+    required:
+    - email
+    - password
+    type: object
+  auth.LoginResponse:
+    properties:
+      message:
+        type: string
+      token:
+        type: string
+    type: object
   auth.RegisterInput:
     properties:
       email:
@@ -33,6 +50,40 @@ info:
   title: ChatLanGO API
   version: "1.0"
 paths:
+  /auth/login:
+    post:
+      consumes:
+      - application/json
+      description: Permite a un usuario autenticarse y obtener un token JWT
+      parameters:
+      - description: Credenciales del usuario
+        in: body
+        name: credentials
+        required: true
+        schema:
+          $ref: '#/definitions/auth.LoginInput'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/auth.LoginResponse'
+        "400":
+          description: Bad Request
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+        "401":
+          description: Unauthorized
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+      summary: Inicio de sesión
+      tags:
+      - auth
   /auth/register:
     post:
       consumes:
