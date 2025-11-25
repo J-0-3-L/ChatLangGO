@@ -4,6 +4,7 @@ import (
 	"go000/internal/auth"
 	"go000/internal/config"
 	"go000/internal/handlers"
+	"go000/internal/posts"
 
 	_ "go000/internal/docs"
 
@@ -27,15 +28,15 @@ func main() {
 	r := gin.Default()
 
 	// Uso de CORS
-	r.Use(cors.Default()) // All origins allowed by default
+	//r.Use(cors.Default()) // All origins allowed by default
 
-	// r.Use(cors.New(cors.Config{
-	// 	AllowOrigins:     []string{"*"}, // Permite todos los orígenes (puedes especificar dominios en lugar de "*")
-	// 	AllowMethods:     []string{"GET", "POST", "PUT", "DELETE", "OPTIONS"},
-	// 	AllowHeaders:     []string{"Origin", "Content-Type", "Authorization"},
-	// 	ExposeHeaders:    []string{"Content-Length"},
-	// 	AllowCredentials: true,
-	// }))
+	r.Use(cors.New(cors.Config{
+		AllowOrigins:     []string{"*"}, // Permite todos los orígenes (puedes especificar dominios en lugar de "*")
+		AllowMethods:     []string{"GET", "POST", "PUT", "DELETE", "OPTIONS"},
+		AllowHeaders:     []string{"Origin", "Content-Type", "Authorization"},
+		ExposeHeaders:    []string{"Content-Length"},
+		AllowCredentials: true,
+	}))
 
 	// Config de swagger
 	config.ConfigSwagger(r)
@@ -43,7 +44,8 @@ func main() {
 	// Rutas
 	handlers.RegisterRoutes(r)
 	auth.AuthRoutes(r)
+	posts.PostRoutes(r)
 
-	// Iniciar el server
-	r.Run(":8080") // go run ./cmd/app/main.go
+	// Iniciar el server --->  go run ./cmd/app/main.go
+	r.Run(":8080")
 }
