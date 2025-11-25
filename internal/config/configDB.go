@@ -6,10 +6,8 @@ import (
 
 	"go000/internal/models"
 
-	//"gorm.io/driver/sqlite"
 	"github.com/glebarez/sqlite"
 	"gorm.io/gorm"
-	//_ "modernc.org/sqlite"
 )
 
 var DB *gorm.DB
@@ -29,6 +27,7 @@ func ConnectionDB() {
 func MigrateModels() error {
 	modelsList := []interface{}{
 		&models.User{},
+		&models.Post{},
 	}
 
 	for _, model := range modelsList {
