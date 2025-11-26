@@ -110,6 +110,27 @@ const docTemplate = `{
                 }
             }
         },
+        "/posts/": {
+            "get": {
+                "description": "Retorna todos los posts publicados por todos los usuarios",
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Posts"
+                ],
+                "summary": "Listar todos los posts",
+                "responses": {
+                    "200": {
+                        "description": "posts",
+                        "schema": {
+                            "type": "object",
+                            "additionalProperties": true
+                        }
+                    }
+                }
+            }
+        },
         "/test/": {
             "get": {
                 "description": "Devuelve un mensaje simple para verificar el funcionamiento del servidor.",

@@ -112,6 +112,20 @@ paths:
       summary: Registro de usuarios
       tags:
       - auth
+  /posts/:
+    get:
+      description: Retorna todos los posts publicados por todos los usuarios
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: posts
+          schema:
+            additionalProperties: true
+            type: object
+      summary: Listar todos los posts
+      tags:
+      - Posts
   /test/:
     get:
       description: Devuelve un mensaje simple para verificar el funcionamiento del
