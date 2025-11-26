@@ -10,6 +10,13 @@ import (
 )
 
 // Listar todos los posts
+
+// @Summary Listar todos los posts
+// @Description Retorna todos los posts publicados por todos los usuarios
+// @Tags Posts
+// @Produce json
+// @Success 200 {object} map[string]interface{} "posts"
+// @Router /posts/ [get]
 func AllPosts(c *gin.Context) {
 	var posts []models.Post
 
