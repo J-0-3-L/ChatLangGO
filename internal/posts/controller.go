@@ -20,8 +20,22 @@ import (
 func AllPosts(c *gin.Context) {
 	var posts []models.Post
 
+	// Salida de posts con user completo
 	config.DB.Preload("User").Order("created_at desc").Find(&posts)
-	c.JSON(http.StatusOK, gin.H{"posts": posts})
+
+	resp := make([]PostResponse, len(posts))
+
+	for i, p := range posts {
+		resp[i] = PostResponse{
+			ID:      p.ID,
+			Content: p.Content,
+			UserID:  p.UserID,
+		}
+	}
+
+	c.JSON(200, gin.H{"posts": resp})
+
+	//c.JSON(http.StatusOK, gin.H{"posts": posts})
 }
 
 // Crear post por cada user
