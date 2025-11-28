@@ -39,6 +39,16 @@ func AllPosts(c *gin.Context) {
 }
 
 // Crear post por cada user
+// @Summary Crear Post
+// @Description Crear nuevo post de usuario logeado
+// @Tags posts
+// @Accept json
+// @Produce json
+// @Param post body posts.CreatePostInput true "Contenido del post"
+// @Security BearerAuth
+// @Sucess 200 {object} posts.PostResponse
+// @Failure 400 {object} map[string]string
+// @Router /posts/ [post]
 func CreatePost(c *gin.Context) {
 
 	var input CreatePostInput
@@ -60,8 +70,14 @@ func CreatePost(c *gin.Context) {
 		return
 	}
 
+	response := PostResponse{
+		ID:      post.ID,
+		Content: post.Content,
+		UserID:  post.UserID,
+	}
+
 	c.JSON(http.StatusCreated, gin.H{
 		"message": "Post creado",
-		"post":    post,
+		"post":    response,
 	})
 }
