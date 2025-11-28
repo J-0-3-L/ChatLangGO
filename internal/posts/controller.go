@@ -81,3 +81,14 @@ func CreatePost(c *gin.Context) {
 		"post":    response,
 	})
 }
+
+func GetPostsUser(c *gin.Context) {
+
+	userID := c.Param("id")
+
+	var posts []models.Post
+	config.DB.Where("user_id=?", userID).Preload("User").Order("created_at desc").Find(&posts)
+
+	c.JSON(http.StatusOK, gin.H{"posts": posts})
+
+}
