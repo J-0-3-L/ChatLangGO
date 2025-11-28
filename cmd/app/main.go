@@ -15,6 +15,10 @@ import (
 // @title ChatLanGO API
 // @version 1.0
 // @description Una app de red social simple de chateo
+// @securityDefinitions.apikey BearerAuth
+// @in header
+// @name Authorization
+// @description Ingresa el token JWT: Bearer {token}
 // @host localhost:8080
 // @BasePath /
 
