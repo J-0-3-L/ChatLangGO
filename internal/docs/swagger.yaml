@@ -1,4 +1,3 @@
-basePath: /
 definitions:
   auth.LoginInput:
     properties:
@@ -43,7 +42,13 @@ definitions:
       username:
         type: string
     type: object
-host: localhost:8080
+  posts.CreatePostInput:
+    properties:
+      content:
+        type: string
+    required:
+    - content
+    type: object
 info:
   contact: {}
   description: Una app de red social simple de chateo
@@ -126,6 +131,31 @@ paths:
       summary: Listar todos los posts
       tags:
       - Posts
+    post:
+      consumes:
+      - application/json
+      description: Crear nuevo post de usuario logeado
+      parameters:
+      - description: Contenido del post
+        in: body
+        name: post
+        required: true
+        schema:
+          $ref: '#/definitions/posts.CreatePostInput'
+      produces:
+      - application/json
+      responses:
+        "400":
+          description: Bad Request
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+      security:
+      - BearerAuth: []
+      summary: Crear Post
+      tags:
+      - posts
   /test/:
     get:
       description: Devuelve un mensaje simple para verificar el funcionamiento del
@@ -142,4 +172,10 @@ paths:
       summary: Endpoint de prueba validada
       tags:
       - Test
+securityDefinitions:
+  BearerAuth:
+    description: 'Ingresa el token JWT: Bearer {token}'
+    in: header
+    name: Authorization
+    type: apiKey
 swagger: "2.0"
