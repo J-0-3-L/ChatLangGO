@@ -28,3 +28,7 @@ type UserPostResponse struct {
 	CreatedAt time.Time     `json:"created_at"`
 	User      UserPostsByID `json:"user"`
 }
+
+type UpdatePostInput struct {
+	Content string `json:"content" binding:"required"`
+}
