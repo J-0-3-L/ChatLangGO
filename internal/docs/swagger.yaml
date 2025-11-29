@@ -49,6 +49,13 @@ definitions:
     required:
     - content
     type: object
+  posts.UpdatePostInput:
+    properties:
+      content:
+        type: string
+    required:
+    - content
+    type: object
   posts.UserPostResponse:
     properties:
       content:
@@ -175,7 +182,7 @@ paths:
       - BearerAuth: []
       summary: Crear Post
       tags:
-      - posts
+      - Posts
   /posts/{id}:
     get:
       description: Retorna todos los posts creados por un user específico
@@ -203,6 +210,55 @@ paths:
               type: string
             type: object
       summary: Listar todos los post de un user
+      tags:
+      - Posts
+    put:
+      consumes:
+      - application/json
+      description: El usuario dueño del post puede actualizar su contenido
+      parameters:
+      - description: ID del post
+        in: path
+        name: id
+        required: true
+        type: integer
+      - description: Contenido nuevo
+        in: body
+        name: body
+        required: true
+        schema:
+          $ref: '#/definitions/posts.UpdatePostInput'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            additionalProperties: true
+            type: object
+        "400":
+          description: Bad Request
+          schema:
+            additionalProperties: true
+            type: object
+        "401":
+          description: Unauthorized
+          schema:
+            additionalProperties: true
+            type: object
+        "403":
+          description: Forbidden
+          schema:
+            additionalProperties: true
+            type: object
+        "404":
+          description: Not Found
+          schema:
+            additionalProperties: true
+            type: object
+      security:
+      - BearerAuth: []
+      summary: Actualizar un post
       tags:
       - Posts
   /test/:
