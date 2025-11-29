@@ -82,6 +82,15 @@ func CreatePost(c *gin.Context) {
 	})
 }
 
+// Listar posts de un user
+// @Summary      Listar todos los post de un user
+// @Description  Retorna todos los posts creados por un user específico
+// @Tags         Posts
+// @Param        id   path      int  true  "ID del usuario"
+// @Produce      json
+// @Success      200  {object}  map[string][]UserPostResponse
+// @Failure      400  {object}  map[string]string "error"
+// @Router       /posts/{id} [get]
 func GetPostsUser(c *gin.Context) {
 
 	userID := c.Param("id")
@@ -89,6 +98,20 @@ func GetPostsUser(c *gin.Context) {
 	var posts []models.Post
 	config.DB.Where("user_id=?", userID).Preload("User").Order("created_at desc").Find(&posts)
 
-	c.JSON(http.StatusOK, gin.H{"posts": posts})
+	resp := make([]UserPostResponse, len(posts))
+
+	for i, p := range posts {
+		resp[i] = UserPostResponse{
+			ID:        p.ID,
+			Content:   p.Content,
+			CreatedAt: p.CreatedAt,
+			User: UserPostsByID{
+				ID:        p.User.ID,
+				Username:  p.User.Username,
+				AvatarURL: p.User.AvatarURL,
+			},
+		}
+	}
+	c.JSON(http.StatusOK, gin.H{"posts": resp})
 
 }
