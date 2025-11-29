@@ -41,7 +41,7 @@ func AllPosts(c *gin.Context) {
 // Crear post por cada user
 // @Summary Crear Post
 // @Description Crear nuevo post de usuario logeado
-// @Tags posts
+// @Tags Posts
 // @Accept json
 // @Produce json
 // @Param post body posts.CreatePostInput true "Contenido del post"
@@ -113,5 +113,46 @@ func GetPostsUser(c *gin.Context) {
 		}
 	}
 	c.JSON(http.StatusOK, gin.H{"posts": resp})
+
+}
+
+//Actualizar post de un user
+
+// @Summary        Actualizar un post
+// @Description    El usuario dueño del post puede actualizar su contenido
+// @Tags           Posts
+// @Accept         json
+// @Produce        json
+// @Param          id path int true "ID del post"
+// @Param          body body UpdatePostInput true "Contenido nuevo"
+// @Security       BearerAuth
+// @Success        200 {object} map[string]interface{}
+// @Failure        400 {object} map[string]interface{}
+// @Failure        401 {object} map[string]interface{}
+// @Failure        403 {object} map[string]interface{}
+// @Failure        404 {object} map[string]interface{}
+// @Router         /posts/{id} [put]
+func UpdatePost(c *gin.Context) {
+
+	id := c.Param("id")
+	//userID:=c.GetUint("user_id")
+
+	var post models.Post
+	if err := config.DB.First(&post, id).Error; err != nil {
+		c.JSON(http.StatusNotFound, gin.H{"error": "Post no encontrado"})
+		return
+	}
+
+	var body UpdatePostInput
+	if err := c.ShouldBindJSON(&body); err != nil {
+		c.JSON(http.StatusBadRequest, gin.H{"err": "Contenido Invalido"})
+		return
+	}
+
+	post.Content = body.Content
+
+	config.DB.Save(&post)
+
+	c.JSON(http.StatusOK, gin.H{"message": "Post Actualizado", "post": post})
 
 }
