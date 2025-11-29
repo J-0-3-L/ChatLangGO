@@ -16,6 +16,7 @@ func PostRoutes(r *gin.Engine) {
 	posts.Use(auth.AuthRequired())
 	{
 		posts.POST("/", CreatePost)
+		posts.PUT("/:id", UpdatePost)
 	}
 
 }
