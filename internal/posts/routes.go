@@ -11,7 +11,7 @@ func PostRoutes(r *gin.Engine) {
 	posts := r.Group("/posts")
 
 	posts.GET("/", AllPosts)
-	//posts.GET("/:id", UserPosts)
+	posts.GET("/:id", GetPostsUser)
 
 	posts.Use(auth.AuthRequired())
 	{
