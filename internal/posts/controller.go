@@ -162,3 +162,29 @@ func UpdatePost(c *gin.Context) {
 	c.JSON(http.StatusOK, gin.H{"message": "Post Actualizado", "post": response})
 
 }
+
+// DELETE POST
+
+// @Summary        Eliminar un post
+// @Description    Se elimina el post solo poniendo el ID en el campo requerido
+// @Tags           Posts
+// @Param          id path int true "ID del post"
+// @Security       BearerAuth
+// @Success        200 {object} map[string]interface{}
+// @Failure        401 {object} map[string]interface{}
+// @Failure        403 {object} map[string]interface{}
+// @Failure        404 {object} map[string]interface{}
+// @Router         /posts/{id} [delete]
+func DeletePost(c *gin.Context) {
+	id := c.Param("id")
+
+	var post models.Post
+	if err := config.DB.First(&post, id).Error; err != nil {
+		c.JSON(http.StatusNotFound, gin.H{"error": "Post no encontrado"})
+		return
+	}
+
+	config.DB.Delete(&post)
+
+	c.JSON(http.StatusOK, gin.H{"message": "Post eliminado"})
+}
