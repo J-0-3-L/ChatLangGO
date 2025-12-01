@@ -19,7 +19,7 @@ var SecretJwt = []byte("SECRETO_PASS")
 
 // @Summary Registro de usuarios
 // @Description Crea nuevos usuarios en el API
-// @Tags auth
+// @Tags Auth
 // @Accept json
 // @Produce json
 // @Param user body auth.RegisterInput true "Datos del usuario"
@@ -68,7 +68,7 @@ func Register(c *gin.Context) {
 
 // @Summary Inicio de sesión
 // @Description Permite a un usuario autenticarse y obtener un token JWT
-// @Tags auth
+// @Tags Auth
 // @Accept json
 // @Produce json
 // @Param credentials body auth.LoginInput true "Credenciales del usuario"
