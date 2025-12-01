@@ -277,6 +277,57 @@
                         "BearerAuth": []
                     }
                 ]
+            },
+            "delete": {
+                "description": "Se elimina el post solo poniendo el ID en el campo requerido",
+                "tags": [
+                    "Posts"
+                ],
+                "summary": "Eliminar un post",
+                "parameters": [
+                    {
+                        "type": "integer",
+                        "description": "ID del post",
+                        "name": "id",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "type": "object",
+                            "additionalProperties": true
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized",
+                        "schema": {
+                            "type": "object",
+                            "additionalProperties": true
+                        }
+                    },
+                    "403": {
+                        "description": "Forbidden",
+                        "schema": {
+                            "type": "object",
+                            "additionalProperties": true
+                        }
+                    },
+                    "404": {
+                        "description": "Not Found",
+                        "schema": {
+                            "type": "object",
+                            "additionalProperties": true
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ]
             }
         },
         "/test/": {

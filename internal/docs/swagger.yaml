@@ -193,6 +193,40 @@ paths:
       tags:
       - Posts
   /posts/{id}:
+    delete:
+      description: Se elimina el post solo poniendo el ID en el campo requerido
+      parameters:
+      - description: ID del post
+        in: path
+        name: id
+        required: true
+        type: integer
+      responses:
+        "200":
+          description: OK
+          schema:
+            additionalProperties: true
+            type: object
+        "401":
+          description: Unauthorized
+          schema:
+            additionalProperties: true
+            type: object
+        "403":
+          description: Forbidden
+          schema:
+            additionalProperties: true
+            type: object
+        "404":
+          description: Not Found
+          schema:
+            additionalProperties: true
+            type: object
+      security:
+      - BearerAuth: []
+      summary: Eliminar un post
+      tags:
+      - Posts
     get:
       description: Retorna todos los posts creados por un user específico
       parameters:
