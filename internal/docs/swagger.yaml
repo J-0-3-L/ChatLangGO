@@ -49,6 +49,15 @@ definitions:
     required:
     - content
     type: object
+  posts.PostResponse:
+    properties:
+      content:
+        type: string
+      id:
+        type: integer
+      user_id:
+        type: integer
+    type: object
   posts.UpdatePostInput:
     properties:
       content:
@@ -115,7 +124,7 @@ paths:
             type: object
       summary: Inicio de sesión
       tags:
-      - auth
+      - Auth
   /auth/register:
     post:
       consumes:
@@ -143,7 +152,7 @@ paths:
             type: object
       summary: Registro de usuarios
       tags:
-      - auth
+      - Auth
   /posts/:
     get:
       description: Retorna todos los posts publicados por todos los usuarios
@@ -234,8 +243,7 @@ paths:
         "200":
           description: OK
           schema:
-            additionalProperties: true
-            type: object
+            $ref: '#/definitions/posts.PostResponse'
         "400":
           description: Bad Request
           schema:

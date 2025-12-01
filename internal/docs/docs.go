@@ -25,7 +25,7 @@ const docTemplate = `{
                     "application/json"
                 ],
                 "tags": [
-                    "auth"
+                    "Auth"
                 ],
                 "summary": "Inicio de sesión",
                 "parameters": [
@@ -77,7 +77,7 @@ const docTemplate = `{
                     "application/json"
                 ],
                 "tags": [
-                    "auth"
+                    "Auth"
                 ],
                 "summary": "Registro de usuarios",
                 "parameters": [
@@ -248,8 +248,7 @@ const docTemplate = `{
                     "200": {
                         "description": "OK",
                         "schema": {
-                            "type": "object",
-                            "additionalProperties": true
+                            "$ref": "#/definitions/posts.PostResponse"
                         }
                     },
                     "400": {
@@ -385,6 +384,20 @@ const docTemplate = `{
             "properties": {
                 "content": {
                     "type": "string"
+                }
+            }
+        },
+        "posts.PostResponse": {
+            "type": "object",
+            "properties": {
+                "content": {
+                    "type": "string"
+                },
+                "id": {
+                    "type": "integer"
+                },
+                "user_id": {
+                    "type": "integer"
                 }
             }
         },
