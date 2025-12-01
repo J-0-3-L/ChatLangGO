@@ -126,7 +126,7 @@ func GetPostsUser(c *gin.Context) {
 // @Param          id path int true "ID del post"
 // @Param          body body UpdatePostInput true "Contenido nuevo"
 // @Security       BearerAuth
-// @Success        200 {object} map[string]interface{}
+// @Success        200 {object} posts.PostResponse
 // @Failure        400 {object} map[string]interface{}
 // @Failure        401 {object} map[string]interface{}
 // @Failure        403 {object} map[string]interface{}
@@ -153,6 +153,12 @@ func UpdatePost(c *gin.Context) {
 
 	config.DB.Save(&post)
 
-	c.JSON(http.StatusOK, gin.H{"message": "Post Actualizado", "post": post})
+	response := PostResponse{
+		ID:      post.ID,
+		Content: post.Content,
+		UserID:  post.UserID,
+	}
+
+	c.JSON(http.StatusOK, gin.H{"message": "Post Actualizado", "post": response})
 
 }
