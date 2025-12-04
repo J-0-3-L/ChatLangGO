@@ -11,8 +11,6 @@ API básica estilo red social (similar a Twitter), desarrollada en **Go**, usand
 
 Incluye autenticación, usuarios y CRUD completo de posts.
 
----
-
 ## 📁 Estructura del Proyecto
 
 MUY PRONTO!!!
@@ -28,8 +26,6 @@ MUY PRONTO!!!
 - **bcrypt**
 - **Swagger**
 
----
-
 ## ⚙️ Instalación
 
 Clona el proyecto:
@@ -42,7 +38,7 @@ cd tu-proyecto
 ```bash  
 go mod tidy
 ```
----
+
 ## ▶️ Ejecutar el Servidor
 ```bash
 go run cmd/app/main.go
