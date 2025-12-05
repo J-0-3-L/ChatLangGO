@@ -13,7 +13,25 @@ Incluye autenticación, usuarios y CRUD completo de posts.
 
 ## 📁 Estructura del Proyecto
 
-MUY PRONTO!!!
+```plaintext
+cmd/
+  └── app/
+      └── main.go
+internal/
+  └── auth/
+  └── config/
+  └── docs/
+  └── models/
+  └── posts/
+  └── tools/
+  └── scan_route.go
+.gitignore
+Chatdb.db
+README.md
+go.mod
+go.sum
+```
+
 ---
 
 ## 🛠 Tecnologías
