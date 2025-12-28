@@ -49,7 +49,7 @@ go.sum
 Clona el proyecto:
 
 ```bash
-git clone https://github.com/tuusuario/tu-proyecto
+git clone https://github.com/J-0-3-L/ChatLangGO
 cd tu-proyecto
 ```
 
